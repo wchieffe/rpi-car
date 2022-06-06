@@ -1,0 +1,1 @@
+g++ libs/I2C.cpp libs/PCA9685.cpp main.cpp -lwiringPi -o go-car
