@@ -5,11 +5,14 @@
 
 #include "libs/PCA9685.h"
 
-#define ENCODER_FR 25
+#define ENCODER_FR 6
+#define ENCODER_BR 27
+#define ENCODER_BL 28
+#define ENCODER_FL 29
 
 int main(void)
 {
-    wiringPiSetupGpio();
+    wiringPiSetup();
     pinMode(ENCODER_FR, INPUT);
     
     PCA9685 pwm(1, 0x40);
@@ -23,10 +26,10 @@ int main(void)
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
     while(1)
     {
-        std::cout << digitalRead(ENCODER_FR);
-        if(std::chrono::steady_clock::now() - start > std::chrono::seconds(5))
+        std::cout << "Reading: " << digitalRead(ENCODER_FR) << "\n";
+        if(std::chrono::steady_clock::now() - start > std::chrono::seconds(10))
             break;
-        delay(500);
+        delay(100);
     }
 
     duty = 0;
